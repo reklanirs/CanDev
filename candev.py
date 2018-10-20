@@ -45,6 +45,153 @@ def _2b_1():
     return Answer[ans], reason
 
 
+def _2b_2():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_3():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_4():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_5():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_6():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_7():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_8():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_9():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_10():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_11():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_12():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_13():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_14():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_15():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_16():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+def _2b_17():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+def _2b_18():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
+
+
+
 
 def main():
     load_dataset()
