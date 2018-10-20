@@ -9,7 +9,7 @@ import numpy as np
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 #sys.stdin=open('in.txt','r')
 
-file_path = '../Hackathon_CanDev2018-10-20-master/OHIDataSet.csv'
+file_path = './OHIDataSet.csv'
 header = []
 data = []
 Answer = ['yes','no','not applicable','I don\'t know']
@@ -22,8 +22,8 @@ def load_dataset(f = file_path):
         for row in reader:
             data.append(row[:-1])
     print(header)
-    print(len(data))
-    print(data[-1])
+    print('Total lines in this dataset:', len(data))
+    print('A sample line:', data[-1])
 
 
 def _2b_1():
