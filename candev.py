@@ -35,7 +35,7 @@ def name_split(s):
     '''
     Split a string by: All possible delimiters; Uppercases; Numbers
     '''
-    words = re.findall(r"[\W']+", s)
+    words = re.findall(r"[A-Za-z0-9']+", s)
     tmp = []
     for i in words:
         tmp += re.sub( r"([A-Z])", r" \1", i).split()
