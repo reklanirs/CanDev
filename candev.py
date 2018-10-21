@@ -17,7 +17,7 @@ clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
 def getkeyword():
     if len(sys.argv)<=1:
-        return ''
+        return 'OHIDataSet.csv'
     tmp = sys.argv[1]
     for i in range(2,len(sys.argv)):
         tmp+=' '+sys.argv[i]
@@ -465,6 +465,29 @@ of the given dataset %s.
 | ---- | ----------------- | --------- | ------------- | ------------------------ | ------------ | -------------------- |
 %s
 
+```{python}
+import numpy as np
+from matplotlib import pyplot as plt
+
+plt.figure(figsize=(9,6))
+n = 3
+X = np.arange(n)+1
+Y = np.array(%s).transpose()
+# X = ['essential', 'valuable', 'desirable','essential', 'valuable', 'essential', 'valuable', 'essential']
+index_ls = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+plt.bar(X, Y[0], alpha=0.9, width = 0.175, facecolor = 'lightskyblue', edgecolor = 'white', label='yes', lw=1)
+plt.bar(X+0.175, Y[1], alpha=0.9, width = 0.175, facecolor = 'yellowgreen', edgecolor = 'white', label='no', lw=1)
+plt.bar(X+0.35, Y[2], alpha=0.9, width = 0.175, facecolor = 'orange', edgecolor = 'white', label='not applicable', lw=1)
+plt.bar(X+0.525, Y[3], alpha=0.9, width = 0.175, facecolor = 'yellow', edgecolor = 'white', label='I don\`t know', lw=1)
+plt.legend(loc="upper right")
+plt.xlabel('essential                                     valuable                                          desirable')
+plt.show()
+```
+
+
+
+
+
 
 ## Detailed assessment results
 
@@ -473,27 +496,7 @@ of the given dataset %s.
 %s
 
 
-```{python}
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.figure(figsize=(9,6))
-n = 3
-X = np.arange(n)+1 #X是1,2,3,4,5,6,7,8,柱的个数
-Y = np.array(%s).transpose()
-# X = ['essential', 'valuable', 'desirable','essential', 'valuable', 'essential', 'valuable', 'essential']
-#uniform均匀分布的随机数，normal是正态分布的随机数，0.5-1均匀分布的数，一共有n个
-index_ls = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-plt.bar(X, Y[0], alpha=0.9, width = 0.175, facecolor = 'lightskyblue', edgecolor = 'white', label='yes', lw=1)
-plt.bar(X+0.175, Y[1], alpha=0.9, width = 0.175, facecolor = 'yellowgreen', edgecolor = 'white', label='no', lw=1)
-plt.bar(X+0.35, Y[2], alpha=0.9, width = 0.175, facecolor = 'orange', edgecolor = 'white', label='not applicable', lw=1)
-plt.bar(X+0.525, Y[3], alpha=0.9, width = 0.175, facecolor = 'yellow', edgecolor = 'white', label='I don\`t know', lw=1)
-plt.legend(loc="upper right") # label的位置在左上，没有这句会找不到label去哪了
-plt.xlabel('essential                                     valuable                                          desirable')
-plt.show()
-```
-
-'''%(dataset_name+' Report', dataset_name, summary_table, detail_table, summary)
+'''%(dataset_name+' Report', dataset_name, summary_table, summary, detail_table)
 
     print(markdown)
     with open('RMarkDownReport.Rmd','w') as fout:
