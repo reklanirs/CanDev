@@ -465,6 +465,8 @@ of the given dataset %s.
 | ---- | ----------------- | --------- | ------------- | ------------------------ | ------------ | -------------------- |
 %s
 
+### Using diagram to show the summary
+
 ```{python}
 import numpy as np
 from matplotlib import pyplot as plt
@@ -478,7 +480,7 @@ index_ls = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
 plt.bar(X, Y[0], alpha=0.9, width = 0.175, facecolor = 'lightskyblue', edgecolor = 'white', label='yes', lw=1)
 plt.bar(X+0.175, Y[1], alpha=0.9, width = 0.175, facecolor = 'yellowgreen', edgecolor = 'white', label='no', lw=1)
 plt.bar(X+0.35, Y[2], alpha=0.9, width = 0.175, facecolor = 'orange', edgecolor = 'white', label='not applicable', lw=1)
-plt.bar(X+0.525, Y[3], alpha=0.9, width = 0.175, facecolor = 'yellow', edgecolor = 'white', label='I don\`t know', lw=1)
+plt.bar(X+0.525, Y[3], alpha=0.9, width = 0.175, facecolor = 'yellow', edgecolor = 'white', label='I dont know', lw=1)
 plt.legend(loc="upper right")
 plt.xlabel('essential                                     valuable                                          desirable')
 plt.show()
