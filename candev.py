@@ -474,32 +474,22 @@ of the given dataset %s.
 
 
 ```{python}
-import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import pyplot as plt
 
-fig, ax = plt.subplots(subplot_kw=dict(polar=True))
-
-size = 0.3
-vals = np.array(%s)
-#normalize vals to 2 pi
-valsnorm = vals/np.sum(vals)*2*np.pi
-#obtain the ordinates of the bar edges
-valsleft = np.cumsum(np.append(0, valsnorm.flatten()[:-1])).reshape(vals.shape)
-
-cmap = plt.get_cmap("tab20c")
-outer_colors = cmap(np.arange(4)*5)
-inner_colors = cmap(np.array([1, 2, 5, 6, 9, 10]))
-
-ax.bar(x=valsleft[:, 0],
-       width=valsnorm.sum(axis=1), bottom=1-size, height=size,
-       color=outer_colors, edgecolor='w', linewidth=1, align="edge")
-
-ax.bar(x=valsleft.flatten(),
-       width=valsnorm.flatten(), bottom=1-2*size, height=size,
-       color=inner_colors, edgecolor='w', linewidth=1, align="edge")
-
-ax.set(title="Pie plot with `ax.bar` and polar coordinates")
-ax.set_axis_off()
+plt.figure(figsize=(9,6))
+n = 3
+X = np.arange(n)+1 #X是1,2,3,4,5,6,7,8,柱的个数
+Y = np.array(%s).transpose()
+# X = ['essential', 'valuable', 'desirable','essential', 'valuable', 'essential', 'valuable', 'essential']
+#uniform均匀分布的随机数，normal是正态分布的随机数，0.5-1均匀分布的数，一共有n个
+index_ls = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+plt.bar(X, Y[0], alpha=0.9, width = 0.175, facecolor = 'lightskyblue', edgecolor = 'white', label='yes', lw=1)
+plt.bar(X+0.175, Y[1], alpha=0.9, width = 0.175, facecolor = 'yellowgreen', edgecolor = 'white', label='no', lw=1)
+plt.bar(X+0.35, Y[2], alpha=0.9, width = 0.175, facecolor = 'orange', edgecolor = 'white', label='not applicable', lw=1)
+plt.bar(X+0.525, Y[3], alpha=0.9, width = 0.175, facecolor = 'yellow', edgecolor = 'white', label='I don\`t know', lw=1)
+plt.legend(loc="upper right") # label的位置在左上，没有这句会找不到label去哪了
+plt.xlabel('essential                                     valuable                                          desirable')
 plt.show()
 ```
 
