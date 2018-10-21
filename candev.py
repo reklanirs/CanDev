@@ -9,6 +9,7 @@ import math,random
 import csv
 import numpy as np
 import re
+import enchant
 
 
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
@@ -34,7 +35,7 @@ def name_split(s):
     '''
     Split a string by: All possible delimiters; Uppercases; Numbers
     '''
-    words = re.findall(r"[\w']+", s)
+    words = re.findall(r"[\W']+", s)
     tmp = []
     for i in words:
         tmp += re.sub( r"([A-Z])", r" \1", i).split()
@@ -92,6 +93,7 @@ def _2b_5():
     '''
     2. valuable
     Was a logical, documented naming convention used for variables (column names)?
+    Split the name into letters and numbers. Check if all words appears in the dictionary
     '''
     ans, reason = 1,''
     d = enchant.Dict("en_US")
@@ -269,7 +271,7 @@ def _2b_19():
 
 def main():
     load_dataset()
-    print(_2b_13())
+    print(_2b_5())
     pass
 
 if __name__ == '__main__':
