@@ -9,6 +9,7 @@ import math,random
 import csv
 import numpy as np
 import re
+import enchant
 
 
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
@@ -31,11 +32,17 @@ def load_dataset(f = file_path):
     print('A sample line:', data[-1])
 
 def name_split(s):
-    words = re.findall(r"[\w']+", s)
-    ret = []
+    '''
+    Split a string by: All possible delimiters; Uppercases; Numbers
+    '''
+    words = re.findall(r"[A-Za-z0-9']+", s)
+    tmp = []
     for i in words:
-        ret += re.sub( r"([A-Z])", r" \1", i).split()
-    return ret 
+        tmp += re.sub( r"([A-Z])", r" \1", i).split()
+    ret = []
+    for i in tmp:
+        ret += re.findall('\d+|\D+', i)
+    return ret
 
 
 def _2b_1():
@@ -86,10 +93,20 @@ def _2b_5():
     '''
     2. valuable
     Was a logical, documented naming convention used for variables (column names)?
+    Split the name into letters and numbers. Check if all words appears in the dictionary
     '''
     ans, reason = 1,''
-    #Your code here
-
+    d = enchant.Dict("en_US")
+    warning_column_names = []
+    for col in header:
+        words = name_split(col)
+        if not all(d.check(i) for i in words):
+            warning_column_names.append(col)
+    if len(warning_column_names)==0:
+        ans = 0
+    else:
+        ans = 1
+        reason = '%s columns may not have logical, documented naming convention'%warning_column_names
     return Answer[ans], reason
 
 
@@ -262,7 +279,7 @@ def _2b_19():
 
 def main():
     load_dataset()
-    print(_2b_13())
+    print(_2b_5())
     pass
 
 if __name__ == '__main__':
