@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+# -*- coding: utf-8 -*-
 import wx
 import os
 import subprocess
@@ -34,12 +36,6 @@ class Example(wx.Frame):
         sizer.Add(line, pos=(1, 0), span=(1, 5),
             flag=wx.EXPAND|wx.BOTTOM, border=10)
 
-        # text2 = wx.StaticText(panel, label="Name")
-        # sizer.Add(text2, pos=(2, 0), flag=wx.LEFT, border=10)
-
-        # tc1 = wx.TextCtrl(panel)
-        # sizer.Add(tc1, pos=(2, 1), span=(1, 3), flag=wx.TOP|wx.EXPAND)
-
         text3 = wx.StaticText(panel, label="            \tDataSet:")
         sizer.Add(text3, pos=(3, 0), flag=wx.LEFT|wx.TOP, border=10)
 
@@ -51,15 +47,6 @@ class Example(wx.Frame):
         button1.Bind(wx.EVT_BUTTON, self.onOpenFile)
         sizer.Add(button1, pos=(3, 4), flag=wx.TOP|wx.RIGHT, border=5)
 
-        # text4 = wx.StaticText(panel, label="Extends")
-        # sizer.Add(text4, pos=(4, 0), flag=wx.TOP|wx.LEFT, border=10)
-
-        # combo = wx.ComboBox(panel)
-        # sizer.Add(combo, pos=(4, 1), span=(1, 3),
-        #     flag=wx.TOP|wx.EXPAND, border=5)
-
-        # button2 = wx.Button(panel, label="Browse...")
-        # sizer.Add(button2, pos=(4, 4), flag=wx.TOP|wx.RIGHT, border=5)
 
         sb = wx.StaticBox(panel, label="Optional Modules")
 
@@ -74,7 +61,9 @@ class Example(wx.Frame):
             flag=wx.LEFT, border=5)
         boxsizer.Add(wx.CheckBox(panel, label="2-a Raw data"),
             flag=wx.LEFT, border=5)
-        boxsizer.Add(wx.CheckBox(panel, label="2-b Data format/structure"),
+        xcb = wx.CheckBox(panel, label="2-b Data format/structure")
+        xcb.SetValue(True)
+        boxsizer.Add(xcb,
             flag=wx.LEFT, border=5)
         boxsizer.Add(wx.CheckBox(panel, label="2-c Data collection"),
             flag=wx.LEFT, border=5)
