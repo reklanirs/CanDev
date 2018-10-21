@@ -79,41 +79,80 @@ def _2b_5():
     return Answer[ans], reason
 def _2b_6():
     '''
+    0.Yes 1.No
+    make sure the header is in the first line.
+
     '''
-    ans, reason = 1,''
-    #Your code here
+    ans, reason = 1,'The header is in line '
+    metadata=['scenario', 'goals', 'long_goal', 'dimension', 'region_id', 'region_name', 'value']
+    if(metadata==header):
+        ans=0
+        reason = 'The header is in the first line'
+    else:
+        ans=1
+        for index,i in enumerate(data):
+            if i==metadata:
+                reason += str(index)
 
     return Answer[ans], reason
 
 
 def _2b_7():
     '''
+    3. I don\'t know
     '''
-    ans, reason = 1,''
+    ans, reason = 3,''
     #Your code here
 
     return Answer[ans], reason
 def _2b_8():
     '''
+    0.Yes 1.No
+    get the extension from the path. if it's .csv, then it can be understand easily both by humans and machines.
     '''
     ans, reason = 1,''
-    #Your code here
-
+    extension = os.path.splitext(file_path)[1]
+    if extension == '.csv':
+        ans = 0
+        reason = 'this is a .csv'
+    else:
+        reason ='because this is a '+ extension
     return Answer[ans], reason
 
 
 def _2b_9():
     '''
+    2.not applicable 3. I don\'t know
     '''
-    ans, reason = 1,''
+    ans, reason = 3,''
     #Your code here
 
     return Answer[ans], reason
 def _2b_10():
     '''
+    0.Yes 1.No
+    Check if columns in the header equal to ''
     '''
-    ans, reason = 1,''
-    #Your code here
+    ans, reason = 1,'Columns'
+    marker=[]
+    for index, i in enumerate(header):
+        if (i==''):
+            ans = 1
+            marker.append(index)
+    if (len(marker)!=0):
+        if(len(marker) ==1):
+            reason = 'Column '
+        for index, i in enumerate(marker):
+            marker[index] += 1
+            reason += str(marker[index])
+            reason += str(',')
+        if(len(marker)==1):
+            reason += ' is empty'
+        else:
+            reason +=' are empty'
+    else:
+        ans = 0
+        reason = 'all the columns have a column name.'
 
     return Answer[ans], reason
 
