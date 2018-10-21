@@ -31,6 +31,9 @@ def load_dataset(f = file_path):
     print('A sample line:', data[-1])
 
 def name_split(s):
+    '''
+    Split a string by: All possible delimiters; Uppercases; Numbers
+    '''
     words = re.findall(r"[\w']+", s)
     tmp = []
     for i in words:
