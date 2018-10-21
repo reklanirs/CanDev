@@ -14,7 +14,17 @@ import ntpath
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 #sys.stdin=open('in.txt','r')
 
-file_path = './OHIDataSet.csv'
+
+def getkeyword():
+    if len(sys.argv)<=1:
+        return ''
+    tmp = sys.argv[1]
+    for i in range(2,len(sys.argv)):
+        tmp+=' '+sys.argv[i]
+    print('Key word is \"%s\"'%(tmp))
+    return tmp
+
+file_path = getkeyword()
 checklist_path = './DataChecklistModules.csv'
 checklist_header = []
 checklist_data = {}
@@ -61,6 +71,8 @@ def name_split(s):
     for i in tmp:
         ret += re.findall('\d+|\D+', i)
     return ret
+
+
 
 
 def _2b_1():
@@ -459,7 +471,39 @@ of the given dataset %s.
 | ID   | Category | Priority for now | Data checklist questions | Answer | Explanation |
 | ---- | -------- | ---------------- | ------------------------ | ------ | ----------- |
 %s
-'''%(dataset_name+' Report', dataset_name, summary_table, detail_table)
+
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, ax = plt.subplots(subplot_kw=dict(polar=True))
+
+size = 0.3
+vals = np.array(%s)
+#normalize vals to 2 pi
+valsnorm = vals/np.sum(vals)*2*np.pi
+#obtain the ordinates of the bar edges
+valsleft = np.cumsum(np.append(0, valsnorm.flatten()[:-1])).reshape(vals.shape)
+
+cmap = plt.get_cmap("tab20c")
+outer_colors = cmap(np.arange(4)*5)
+inner_colors = cmap(np.array([1, 2, 5, 6, 9, 10]))
+
+ax.bar(x=valsleft[:, 0],
+       width=valsnorm.sum(axis=1), bottom=1-size, height=size,
+       color=outer_colors, edgecolor='w', linewidth=1, align="edge")
+
+ax.bar(x=valsleft.flatten(),
+       width=valsnorm.flatten(), bottom=1-2*size, height=size,
+       color=inner_colors, edgecolor='w', linewidth=1, align="edge")
+
+ax.set(title="Pie plot with `ax.bar` and polar coordinates")
+ax.set_axis_off()
+plt.show()
+```
+
+'''%(dataset_name+' Report', dataset_name, summary_table, detail_table, summary)
 
     print(markdown)
     with open('RMarkDownReport.Rmd','w') as fout:
