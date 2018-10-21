@@ -61,6 +61,8 @@ def _2b_3():
     #Your code here
 
     return Answer[ans], reason
+
+
 def _2b_4():
     '''
     '''
@@ -77,6 +79,8 @@ def _2b_5():
     #Your code here
 
     return Answer[ans], reason
+
+
 def _2b_6():
     '''
     '''
@@ -93,6 +97,8 @@ def _2b_7():
     #Your code here
 
     return Answer[ans], reason
+
+
 def _2b_8():
     '''
     '''
@@ -109,6 +115,8 @@ def _2b_9():
     #Your code here
 
     return Answer[ans], reason
+
+
 def _2b_10():
     '''
     '''
@@ -120,11 +128,12 @@ def _2b_10():
 
 def _2b_11():
     '''
+    1. essential
+    Are the column names consistent with the documentation?
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 3,'No documentation presented'
     return Answer[ans], reason
+
 def _2b_12():
     '''
     '''
@@ -141,6 +150,8 @@ def _2b_13():
     #Your code here
 
     return Answer[ans], reason
+
+
 def _2b_14():
     '''
     '''
@@ -173,6 +184,8 @@ def _2b_():
     #Your code here
 
     return Answer[ans], reason
+
+    
 def _2b_17():
     '''
     '''
@@ -191,6 +204,13 @@ def _2b_18():
     return Answer[ans], reason
 
 
+def _2b_19():
+    '''
+    '''
+    ans, reason = 1,''
+    #Your code here
+
+    return Answer[ans], reason
 
 
 def main():
