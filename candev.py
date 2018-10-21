@@ -82,28 +82,53 @@ def _2b_1():
 
 def _2b_2():
     '''
+    2. valuable
+    In the case where the data reside in a relational database, is the database in 3rd normal form?
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 2,'It is not a database file'
     return Answer[ans], reason
 
 
 def _2b_3():
     '''
+    1. essential
+    In the case where the data do not reside in a relational database, are the data files tabular?
+    i.e. There is one rectangular table per file, systematically arranged in rows and columns with the headers (column names) in the 1st row.
+    Every record (row) has the same column name. Every column contains the same type of data, and only one type of data.
+    How: Check the csv file has a header by using has_header from csv package; By checking the number of columns for each row is equal to the column numbers for header;
+         By checking the data type of every unit in every row
     '''
-    ans, reason = 1,''
-    #Your code here
+    ans, reason = 1, ''
+    with open(file_path, 'r') as unknown_file:
+        sniffer = csv.Sniffer()
+        has_header = sniffer.has_header(unknown_file.read(2048))
+        unknown_file.seek(0)
+
+        has_rowcols = False
+        reader = csv.reader(unknown_file, delimiter=',')
+        num_cols = len(next(reader))
+
+        for row in data:
+            if num_cols != len(row):
+                has_rowcols = True
+                break
+
+        All = all(isinstance(column, (int, str, float)) for column in unknown_file)
+
+        if (has_header == True & has_rowcols == True & All == True):
+            ans, reason = 0, 'This data file is tabular.'
+        else:
+            ans, reason = 1, 'This data is not tabular.'
 
     return Answer[ans], reason
 
 
 def _2b_4():
     '''
+    1. essential
+    Are the field types (column types) used appropriate? (i.e. date field for dates, alphanumeric field for text, numerical field for numbers, etc)
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 2,'.csv file does not indicate data type.'
     return Answer[ans], reason
 
 
@@ -130,17 +155,29 @@ def _2b_5():
 
 def _2b_6():
     '''
+    0.Yes 1.No
+    make sure the header is in the first line.
+
     '''
-    ans, reason = 1,''
-    #Your code here
+    ans, reason = 1,'The header is in line '
+    metadata=['scenario', 'goals', 'long_goal', 'dimension', 'region_id', 'region_name', 'value']
+    if(metadata==header):
+        ans=0
+        reason = 'The header is in the first line'
+    else:
+        ans=1
+        for index,i in enumerate(data):
+            if i==metadata:
+                reason += str(index)
 
     return Answer[ans], reason
 
 
 def _2b_7():
     '''
+    3. I don\'t know
     '''
-    ans, reason = 1,''
+    ans, reason = 3,''
     #Your code here
 
     return Answer[ans], reason
@@ -148,17 +185,24 @@ def _2b_7():
 
 def _2b_8():
     '''
+    0.Yes 1.No
+    get the extension from the path. if it's .csv, then it can be understand easily both by humans and machines.
     '''
     ans, reason = 1,''
-    #Your code here
-
+    extension = os.path.splitext(file_path)[1]
+    if extension == '.csv':
+        ans = 0
+        reason = 'this is a .csv'
+    else:
+        reason ='because this is a '+ extension
     return Answer[ans], reason
 
 
 def _2b_9():
     '''
+    2.not applicable 3. I don\'t know
     '''
-    ans, reason = 1,''
+    ans, reason = 3,''
     #Your code here
 
     return Answer[ans], reason
@@ -166,9 +210,29 @@ def _2b_9():
 
 def _2b_10():
     '''
+    0.Yes 1.No
+    Check if columns in the header equal to ''
     '''
-    ans, reason = 1,''
-    #Your code here
+    ans, reason = 1,'Columns'
+    marker=[]
+    for index, i in enumerate(header):
+        if (i==''):
+            ans = 1
+            marker.append(index)
+    if (len(marker)!=0):
+        if(len(marker) ==1):
+            reason = 'Column '
+        for index, i in enumerate(marker):
+            marker[index] += 1
+            reason += str(marker[index])
+            reason += str(',')
+        if(len(marker)==1):
+            reason += ' is empty'
+        else:
+            reason +=' are empty'
+    else:
+        ans = 0
+        reason = 'all the columns have a column name.'
 
     return Answer[ans], reason
 
@@ -242,42 +306,58 @@ def _2b_15():
     ans, reason = 2,'This tool is only used for single dataset'
     return Answer[ans], reason
 
-
 def _2b_16():
     '''
+    2. valuable
+    Are the filenames consistent, descriptive, and informative (clearly indicates content) to humans?
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 0,'The question is subjective, so it would be better to double check it by humans.'
     return Answer[ans], reason
-
 
 def _2b_17():
     '''
+    3. desirable
+    Do the filenames follow the convention: less than 70 characters; most unique content at start of filename; no acronyms; no jargon; no organization name?
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 0, ''
+    filename = os.path.splitext(file_path)[-2]
+    if(len(filename)>70):
+        ans, reason = 1, 'File name should not be longer than 70 characters.'
+    else:
+        #if there are two or more continuous capitals, there might be acronyms in file name
+        has_continuous_capital = False
+        for i in range(1,len(filename)):
+            if filename[i].isupper() and filename[i-1].isupper():
+                has_continuous_capital = True
+                break
+        if has_continuous_capital == True:
+            ans, reason = 1, 'There might be acronyms in file name.'
     return Answer[ans], reason
 
 
 def _2b_18():
     '''
+    2. valuable
+    Was a logical, documented naming convention used for file names?
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 0, 'File names are logical and documented'
+    filename = os.path.splitext(file_path)[-2]
+    ret = name_split(filename)
+    dictionary = enchant.Dict("en_US")
+    for str in ret:
+        if dictionary.check(str):
+            pass
+        else:
+            ans, reason = 1, 'File names are not logical.'
     return Answer[ans], reason
-
 
 def _2b_19():
     '''
+    3. desirable
+    Are standard/controlled vocabularies used within the data?
     '''
-    ans, reason = 1,''
-    #Your code here
-
+    ans, reason = 2,'Standard/controlled criterias are needed.'
     return Answer[ans], reason
-
 
 def evaluate():
     global results_according_to_modules
@@ -389,8 +469,7 @@ of the given dataset %s.
 
 def main():
     load_dataset()
-    print(_2b_5())
-
+    #print(_2b_5())
     evaluate()
     task2_overall_rating()
     task3_R_markdown_report()
