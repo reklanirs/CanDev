@@ -360,18 +360,21 @@ output: html_document
 ---
 
 The code below demonstrates an R markdown report containing:
+
 * Overview and summary of the assessment results
+
 * Detailed assessment results
+
 of the given dataset %s.
 
-##Overview and summary of the assessment results
+## Overview and summary of the assessment results
 
 | ID   | Category          | Questions | Answers (yes) | Answers (no) | Answers (not applicable) | Answers (I don't no) |
 | ---- | ----------------- | --------- | ------------- | ------------------------ | ------------ | -------------------- |
 %s
 
 
-##Detailed assessment results
+## Detailed assessment results
 
 | ID   | Category | Priority for now | Data checklist questions | Answer | Explanation |
 | ---- | -------- | ---------------- | ------------------------ | ------ | ----------- |
