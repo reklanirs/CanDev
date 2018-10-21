@@ -32,10 +32,13 @@ def load_dataset(f = file_path):
 
 def name_split(s):
     words = re.findall(r"[\w']+", s)
-    ret = []
+    tmp = []
     for i in words:
-        ret += re.sub( r"([A-Z])", r" \1", i).split()
-    return ret 
+        tmp += re.sub( r"([A-Z])", r" \1", i).split()
+    ret = []
+    for i in tmp:
+        ret += re.findall('\d+|\D+', i)
+    return ret
 
 
 def _2b_1():
@@ -88,8 +91,17 @@ def _2b_5():
     Was a logical, documented naming convention used for variables (column names)?
     '''
     ans, reason = 1,''
-    #Your code here
-
+    d = enchant.Dict("en_US")
+    warning_column_names = []
+    for col in header:
+        words = name_split(col)
+        if not all(d.check(i) for i in words):
+            warning_column_names.append(col)
+    if len(warning_column_names)==0:
+        ans = 0
+    else:
+        ans = 1
+        reason = '%s columns may not have logical, documented naming convention'%warning_column_names
     return Answer[ans], reason
 
 
