@@ -47,20 +47,73 @@ def _2b_1():
 
 def _2b_2():
     '''
+    2. valuable
+    In the case where the data reside in a relational database, is the database in 3rd normal form?
     '''
     ans, reason = 1,''
     #Your code here
+    with open(file_path,'r') as unknown_file:
 
-    return Answer[ans], reason
+     return Answer[ans], reason
 
 
 def _2b_3():
     '''
+    1. essential
+    In the case where the data do not reside in a relational database, are the data files tabular?
+    i.e. There is one rectangular table per file, systematically arranged in rows and columns with the headers (column names) in the 1st row.
+    Every record (row) has the same column name. Every column contains the same type of data, and only one type of data.
+    How: Check the csv file has a header by using has_header from csv package; By checking the number of columns for each row is equal to the column numbers for header;
+         By checking
     '''
     ans, reason = 1,''
-    #Your code here
+    with open(file_path,'r') as unknown_file:
+        sniffer = csv.Sniffer()
+        has_header = sniffer.has_header(unknown_file.read(2048))
+        unknown_file.seek(0)
+
+        has_rowcols = False
+        reader = csv.reader(unknown_file,delimiter=',')
+        num_cols = len(next(reader))
+   
+        for row in data:
+            if num_cols != len(row):
+                has_rowcols = True
+                break
+
+        # num_rowcols = False
+        # num_cols = len(header)
+        # print('num_cols', num_cols)
+        # print(data[0])
+        # for row in data:
+        #     print(len(row))
+        #     # print(row)
+        #     if not len(row) == num_cols:
+        #         num_rowcols = True
+        #         break
+
+        All = all(isinstance(column,(int, str, float)) for column in unknown_file)
+
+        if (has_header == True & has_rowcols == True & All == True):
+            ans, reason = 0, 'This data file is tabular.'
+        else:
+            ans, reason = 1, 'This data is not tabular.'
 
     return Answer[ans], reason
+
+def _2b_3_test():
+    num_rowcols = False
+    num_cols = len(header)
+    print('num_cols',num_cols)
+    print(data[0])
+    for row in data:
+        print(len(row))
+        #print(row)
+        if not len(row) == num_cols:
+            num_rowcols = True
+    return num_rowcols
+
+
 def _2b_4():
     '''
     '''
@@ -195,7 +248,7 @@ def _2b_18():
 
 def main():
     load_dataset()
-    print(_2b_1())
+    print(_2b_3())
     pass
 
 if __name__ == '__main__':
