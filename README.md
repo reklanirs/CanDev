@@ -11,6 +11,9 @@ Build a tool to automate the assessment of diverse datasets against specified cr
 **Data:**
 A modified version of the Ocean Health Index Data.
 
+**Time limit:**
+2 Days.
+
 **Achievements:**
 - R Markdown Report
 - Pass/Fail dataset rating report 
